@@ -1,0 +1,7 @@
+1 Andrei Laptops 200
+2 Ana Laptops 300
+3 John Bikes 150
+4 Dan Laptops 500
+5 Johnny Furniture 1500
+6 Amanda Books 300
+7 Miranda Books 450

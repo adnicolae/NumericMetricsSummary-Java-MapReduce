@@ -1,4 +1,4 @@
-package summaries;
+package filter;
 
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -16,25 +16,22 @@ public class Main extends Configured implements Tool {
     public int run(String[] args) throws Exception {
         //
         Job job = Job.getInstance(getConf());
-        job.setJobName("average");
+        job.setJobName("filter");
         // the jar where the main class is present in
         job.setJarByClass(Main.class);
 
         // set the data types of the output
-        job.setMapOutputValueClass(NumPair.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(DoubleWritable.class);
+        job.setOutputKeyClass(NullWritable.class);
+        job.setOutputValueClass(Text.class);
 
         job.setMapperClass(Map.class);
         job.setReducerClass(Reduce.class);
-        job.setCombinerClass(Combine.class);
 
         Path inputFilePath = new Path
                 ("/home/andrei/hadoop-install/HadoopProjects/NumericMetricsSummary/data/input" +
-                        "/census.txt");
+                        "/orders.txt");
         Path outputFilePath = new Path
-                ("/home/andrei/hadoop-install/HadoopProjects/NumericMetricsSummary/data/output" +
-                        "-with-combiner2");
+                ("/home/andrei/hadoop-install/HadoopProjects/NumericMetricsSummary/data/filter-output");
 
         FileInputFormat.addInputPath(job, inputFilePath);
         FileOutputFormat.setOutputPath(job, outputFilePath);
