@@ -21,17 +21,20 @@ public class Main extends Configured implements Tool {
         job.setJarByClass(Main.class);
 
         // set the data types of the output
+        job.setMapOutputValueClass(NumPair.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(DoubleWritable.class);
 
         job.setMapperClass(Map.class);
         job.setReducerClass(Reduce.class);
+        job.setCombinerClass(Combine.class);
 
         Path inputFilePath = new Path
                 ("/home/andrei/hadoop-install/HadoopProjects/NumericMetricsSummary/data/input" +
                         "/census.txt");
         Path outputFilePath = new Path
-                ("/home/andrei/hadoop-install/HadoopProjects/NumericMetricsSummary/data/output");
+                ("/home/andrei/hadoop-install/HadoopProjects/NumericMetricsSummary/data/output" +
+                        "-with-combiner");
 
         FileInputFormat.addInputPath(job, inputFilePath);
         FileOutputFormat.setOutputPath(job, outputFilePath);
