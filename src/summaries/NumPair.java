@@ -76,4 +76,9 @@ public class NumPair implements WritableComparable<NumPair> {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        return hoursPerWeek + "\t" + countInSet;
+    }
 }
